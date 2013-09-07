@@ -1,0 +1,1805 @@
+Terminals unused in grammar
+
+   KEYWORD
+   OPERATOR
+   STRINGVAL
+
+
+State 42 conflicts: 1 shift/reduce
+State 61 conflicts: 1 shift/reduce
+State 140 conflicts: 1 shift/reduce
+State 158 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: Goal $end
+
+    1 Goal: MacroDefinitionTemp MainClass TypeDeclarationTemp
+
+    2 MacroDefinitionTemp: MacroDefinitionTemp MacroDefinition
+    3                    | /* empty */
+
+    4 TypeDeclarationTemp: TypeDeclarationTemp TypeDeclaration
+    5                    | /* empty */
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    7 TypeDeclaration: CLASS IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+    8                | CLASS IDENTIFIER EXTENDS IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+
+    9 TempType: TempType Type IDENTIFIER ';'
+   10         | /* empty */
+
+   11 MethodDeclarationTemp: MethodDeclarationTemp MethodDeclaration
+   12                      | /* empty */
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+   14 Argument: Argument ',' Type IDENTIFIER
+   15         | Type IDENTIFIER
+   16         | /* empty */
+
+   17 ArugmentSecondTemp: ArugmentSecondTemp Type IDENTIFIER ';'
+   18                   | /* empty */
+
+   19 StatementTemp: StatementTemp Statement
+   20              | /* empty */
+
+   21 Type: BOOLEAN
+   22     | INT
+   23     | IDENTIFIER
+   24     | Type '[' ']'
+
+   25 Statement: '{' StatementTemp '}'
+   26          | PRINTSTMT '(' Expression ')' ';'
+   27          | IDENTIFIER '=' Expression ';'
+   28          | IDENTIFIER '[' Expression ']' '=' Expression ';'
+   29          | IF '(' Expression ')' Statement
+   30          | IF '(' Expression ')' Statement ELSE Statement
+   31          | WHILE '(' Expression ')' Statement
+   32          | IDENTIFIER '(' ExpressionParam ')' ';'
+
+   33 Expression: PrimaryExpression '<' PrimaryExpression
+   34           | PrimaryExpression '&' PrimaryExpression
+   35           | PrimaryExpression '&' '!' Expression
+   36           | '!' Expression '&' '!' Expression
+   37           | '!' Expression '&' PrimaryExpression
+   38           | PrimaryExpression '+' PrimaryExpression
+   39           | PrimaryExpression '-' PrimaryExpression
+   40           | PrimaryExpression '*' PrimaryExpression
+   41           | PrimaryExpression '/' PrimaryExpression
+   42           | PrimaryExpression '[' PrimaryExpression ']'
+   43           | PrimaryExpression '.' LENGTH
+   44           | PrimaryExpression '.' IDENTIFIER '(' ExpressionParam ')'
+   45           | IDENTIFIER '(' ExpressionParam ')'
+   46           | PrimaryExpression
+   47           | '!' Expression
+
+   48 ExpressionParam: ExpressionParam ',' Expression
+   49                | Expression
+   50                | /* empty */
+
+   51 PrimaryExpression: INTVAL
+   52                  | BOOLVAL
+   53                  | IDENTIFIER
+   54                  | THIS
+   55                  | NEW Type '[' Expression ']'
+   56                  | NEW IDENTIFIER '(' ')'
+   57                  | '(' Expression ')'
+
+   58 MacroDefinition: MacroDefStatement
+   59                | MacroDefExpression
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '{' StatementTemp '}'
+
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '(' Expression ')'
+
+   62 IDENTIFIERParam: IDENTIFIERParam ',' IDENTIFIER
+   63                | IDENTIFIER
+   64                | /* empty */
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'!' (33) 35 36 37 47
+'&' (38) 34 35 36 37
+'(' (40) 6 13 26 29 30 31 32 44 45 56 57 60 61
+')' (41) 6 13 26 29 30 31 32 44 45 56 57 60 61
+'*' (42) 40
+'+' (43) 38
+',' (44) 14 48 62
+'-' (45) 39
+'.' (46) 43 44
+'/' (47) 41
+';' (59) 9 13 17 26 27 28 32
+'<' (60) 33
+'=' (61) 27 28
+'[' (91) 6 24 28 42 55
+']' (93) 6 24 28 42 55
+'{' (123) 6 7 8 13 25 60
+'}' (125) 6 7 8 13 25 60
+error (256)
+INTVAL (258) 51
+BOOLVAL (259) 52
+KEYWORD (260)
+OPERATOR (261)
+IDENTIFIER (262) 6 7 8 9 13 14 15 17 23 27 28 32 44 45 53 56 60 61
+    62 63
+STRINGVAL (263)
+THIS (264) 54
+NEW (265) 55 56
+RETURN (266) 13
+CLASS (267) 6 7 8
+DEFINE (268) 60 61
+PUBLIC (269) 6 13
+STATIC (270) 6
+VOID (271) 6
+INT (272) 22
+BOOLEAN (273) 21
+IF (274) 29 30
+ELSE (275) 30
+WHILE (276) 31
+EXTENDS (277) 8
+STRING (278) 6
+PRINTSTMT (279) 26
+LENGTH (280) 43
+MAIN (281) 6
+
+
+Nonterminals, with rules where they appear
+
+$accept (44)
+    on left: 0
+Goal (45)
+    on left: 1, on right: 0
+MacroDefinitionTemp (46)
+    on left: 2 3, on right: 1 2
+TypeDeclarationTemp (47)
+    on left: 4 5, on right: 1 4
+MainClass (48)
+    on left: 6, on right: 1
+TypeDeclaration (49)
+    on left: 7 8, on right: 4
+TempType (50)
+    on left: 9 10, on right: 7 8 9
+MethodDeclarationTemp (51)
+    on left: 11 12, on right: 7 8 11
+MethodDeclaration (52)
+    on left: 13, on right: 11
+Argument (53)
+    on left: 14 15 16, on right: 13 14
+ArugmentSecondTemp (54)
+    on left: 17 18, on right: 13 17
+StatementTemp (55)
+    on left: 19 20, on right: 13 19 25 60
+Type (56)
+    on left: 21 22 23 24, on right: 9 13 14 15 17 24 55
+Statement (57)
+    on left: 25 26 27 28 29 30 31 32, on right: 6 19 29 30 31
+Expression (58)
+    on left: 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47, on right:
+    13 26 27 28 29 30 31 35 36 37 47 48 49 55 57 61
+ExpressionParam (59)
+    on left: 48 49 50, on right: 32 44 45 48
+PrimaryExpression (60)
+    on left: 51 52 53 54 55 56 57, on right: 33 34 35 37 38 39 40 41
+    42 43 44 46
+MacroDefinition (61)
+    on left: 58 59, on right: 2
+MacroDefStatement (62)
+    on left: 60, on right: 58
+MacroDefExpression (63)
+    on left: 61, on right: 59
+IDENTIFIERParam (64)
+    on left: 62 63 64, on right: 60 61 62
+
+
+state 0
+
+    0 $accept: . Goal $end
+
+    $default  reduce using rule 3 (MacroDefinitionTemp)
+
+    Goal                 go to state 1
+    MacroDefinitionTemp  go to state 2
+
+
+state 1
+
+    0 $accept: Goal . $end
+
+    $end  shift, and go to state 3
+
+
+state 2
+
+    1 Goal: MacroDefinitionTemp . MainClass TypeDeclarationTemp
+    2 MacroDefinitionTemp: MacroDefinitionTemp . MacroDefinition
+
+    CLASS   shift, and go to state 4
+    DEFINE  shift, and go to state 5
+
+    MainClass           go to state 6
+    MacroDefinition     go to state 7
+    MacroDefStatement   go to state 8
+    MacroDefExpression  go to state 9
+
+
+state 3
+
+    0 $accept: Goal $end .
+
+    $default  accept
+
+
+state 4
+
+    6 MainClass: CLASS . IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    IDENTIFIER  shift, and go to state 10
+
+
+state 5
+
+   60 MacroDefStatement: DEFINE . IDENTIFIER '(' IDENTIFIERParam ')' '{' StatementTemp '}'
+   61 MacroDefExpression: DEFINE . IDENTIFIER '(' IDENTIFIERParam ')' '(' Expression ')'
+
+    IDENTIFIER  shift, and go to state 11
+
+
+state 6
+
+    1 Goal: MacroDefinitionTemp MainClass . TypeDeclarationTemp
+
+    $default  reduce using rule 5 (TypeDeclarationTemp)
+
+    TypeDeclarationTemp  go to state 12
+
+
+state 7
+
+    2 MacroDefinitionTemp: MacroDefinitionTemp MacroDefinition .
+
+    $default  reduce using rule 2 (MacroDefinitionTemp)
+
+
+state 8
+
+   58 MacroDefinition: MacroDefStatement .
+
+    $default  reduce using rule 58 (MacroDefinition)
+
+
+state 9
+
+   59 MacroDefinition: MacroDefExpression .
+
+    $default  reduce using rule 59 (MacroDefinition)
+
+
+state 10
+
+    6 MainClass: CLASS IDENTIFIER . '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    '{'  shift, and go to state 13
+
+
+state 11
+
+   60 MacroDefStatement: DEFINE IDENTIFIER . '(' IDENTIFIERParam ')' '{' StatementTemp '}'
+   61 MacroDefExpression: DEFINE IDENTIFIER . '(' IDENTIFIERParam ')' '(' Expression ')'
+
+    '('  shift, and go to state 14
+
+
+state 12
+
+    1 Goal: MacroDefinitionTemp MainClass TypeDeclarationTemp .
+    4 TypeDeclarationTemp: TypeDeclarationTemp . TypeDeclaration
+
+    CLASS  shift, and go to state 15
+
+    $default  reduce using rule 1 (Goal)
+
+    TypeDeclaration  go to state 16
+
+
+state 13
+
+    6 MainClass: CLASS IDENTIFIER '{' . PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    PUBLIC  shift, and go to state 17
+
+
+state 14
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' . IDENTIFIERParam ')' '{' StatementTemp '}'
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' . IDENTIFIERParam ')' '(' Expression ')'
+
+    IDENTIFIER  shift, and go to state 18
+
+    $default  reduce using rule 64 (IDENTIFIERParam)
+
+    IDENTIFIERParam  go to state 19
+
+
+state 15
+
+    7 TypeDeclaration: CLASS . IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+    8                | CLASS . IDENTIFIER EXTENDS IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+
+    IDENTIFIER  shift, and go to state 20
+
+
+state 16
+
+    4 TypeDeclarationTemp: TypeDeclarationTemp TypeDeclaration .
+
+    $default  reduce using rule 4 (TypeDeclarationTemp)
+
+
+state 17
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC . STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    STATIC  shift, and go to state 21
+
+
+state 18
+
+   63 IDENTIFIERParam: IDENTIFIER .
+
+    $default  reduce using rule 63 (IDENTIFIERParam)
+
+
+state 19
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam . ')' '{' StatementTemp '}'
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam . ')' '(' Expression ')'
+   62 IDENTIFIERParam: IDENTIFIERParam . ',' IDENTIFIER
+
+    ')'  shift, and go to state 22
+    ','  shift, and go to state 23
+
+
+state 20
+
+    7 TypeDeclaration: CLASS IDENTIFIER . '{' TempType MethodDeclarationTemp '}'
+    8                | CLASS IDENTIFIER . EXTENDS IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+
+    EXTENDS  shift, and go to state 24
+    '{'      shift, and go to state 25
+
+
+state 21
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC . VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    VOID  shift, and go to state 26
+
+
+state 22
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' . '{' StatementTemp '}'
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' . '(' Expression ')'
+
+    '{'  shift, and go to state 27
+    '('  shift, and go to state 28
+
+
+state 23
+
+   62 IDENTIFIERParam: IDENTIFIERParam ',' . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 29
+
+
+state 24
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS . IDENTIFIER '{' TempType MethodDeclarationTemp '}'
+
+    IDENTIFIER  shift, and go to state 30
+
+
+state 25
+
+    7 TypeDeclaration: CLASS IDENTIFIER '{' . TempType MethodDeclarationTemp '}'
+
+    $default  reduce using rule 10 (TempType)
+
+    TempType  go to state 31
+
+
+state 26
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID . MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    MAIN  shift, and go to state 32
+
+
+state 27
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '{' . StatementTemp '}'
+
+    $default  reduce using rule 20 (StatementTemp)
+
+    StatementTemp  go to state 33
+
+
+state 28
+
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '(' . Expression ')'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 41
+    PrimaryExpression  go to state 42
+
+
+state 29
+
+   62 IDENTIFIERParam: IDENTIFIERParam ',' IDENTIFIER .
+
+    $default  reduce using rule 62 (IDENTIFIERParam)
+
+
+state 30
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS IDENTIFIER . '{' TempType MethodDeclarationTemp '}'
+
+    '{'  shift, and go to state 43
+
+
+state 31
+
+    7 TypeDeclaration: CLASS IDENTIFIER '{' TempType . MethodDeclarationTemp '}'
+    9 TempType: TempType . Type IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    $default  reduce using rule 12 (MethodDeclarationTemp)
+
+    MethodDeclarationTemp  go to state 47
+    Type                   go to state 48
+
+
+state 32
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN . '(' STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    '('  shift, and go to state 49
+
+
+state 33
+
+   19 StatementTemp: StatementTemp . Statement
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '{' StatementTemp . '}'
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+    '}'         shift, and go to state 55
+
+    Statement  go to state 56
+
+
+state 34
+
+   51 PrimaryExpression: INTVAL .
+
+    $default  reduce using rule 51 (PrimaryExpression)
+
+
+state 35
+
+   52 PrimaryExpression: BOOLVAL .
+
+    $default  reduce using rule 52 (PrimaryExpression)
+
+
+state 36
+
+   45 Expression: IDENTIFIER . '(' ExpressionParam ')'
+   53 PrimaryExpression: IDENTIFIER .
+
+    '('  shift, and go to state 57
+
+    $default  reduce using rule 53 (PrimaryExpression)
+
+
+state 37
+
+   54 PrimaryExpression: THIS .
+
+    $default  reduce using rule 54 (PrimaryExpression)
+
+
+state 38
+
+   55 PrimaryExpression: NEW . Type '[' Expression ']'
+   56                  | NEW . IDENTIFIER '(' ')'
+
+    IDENTIFIER  shift, and go to state 58
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    Type  go to state 59
+
+
+state 39
+
+   57 PrimaryExpression: '(' . Expression ')'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 60
+    PrimaryExpression  go to state 42
+
+
+state 40
+
+   36 Expression: '!' . Expression '&' '!' Expression
+   37           | '!' . Expression '&' PrimaryExpression
+   47           | '!' . Expression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 61
+    PrimaryExpression  go to state 42
+
+
+state 41
+
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '(' Expression . ')'
+
+    ')'  shift, and go to state 62
+
+
+state 42
+
+   33 Expression: PrimaryExpression . '<' PrimaryExpression
+   34           | PrimaryExpression . '&' PrimaryExpression
+   35           | PrimaryExpression . '&' '!' Expression
+   38           | PrimaryExpression . '+' PrimaryExpression
+   39           | PrimaryExpression . '-' PrimaryExpression
+   40           | PrimaryExpression . '*' PrimaryExpression
+   41           | PrimaryExpression . '/' PrimaryExpression
+   42           | PrimaryExpression . '[' PrimaryExpression ']'
+   43           | PrimaryExpression . '.' LENGTH
+   44           | PrimaryExpression . '.' IDENTIFIER '(' ExpressionParam ')'
+   46           | PrimaryExpression .
+
+    '['  shift, and go to state 63
+    '<'  shift, and go to state 64
+    '&'  shift, and go to state 65
+    '+'  shift, and go to state 66
+    '-'  shift, and go to state 67
+    '*'  shift, and go to state 68
+    '/'  shift, and go to state 69
+    '.'  shift, and go to state 70
+
+    '&'       [reduce using rule 46 (Expression)]
+    $default  reduce using rule 46 (Expression)
+
+
+state 43
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS IDENTIFIER '{' . TempType MethodDeclarationTemp '}'
+
+    $default  reduce using rule 10 (TempType)
+
+    TempType  go to state 71
+
+
+state 44
+
+   23 Type: IDENTIFIER .
+
+    $default  reduce using rule 23 (Type)
+
+
+state 45
+
+   22 Type: INT .
+
+    $default  reduce using rule 22 (Type)
+
+
+state 46
+
+   21 Type: BOOLEAN .
+
+    $default  reduce using rule 21 (Type)
+
+
+state 47
+
+    7 TypeDeclaration: CLASS IDENTIFIER '{' TempType MethodDeclarationTemp . '}'
+   11 MethodDeclarationTemp: MethodDeclarationTemp . MethodDeclaration
+
+    PUBLIC  shift, and go to state 72
+    '}'     shift, and go to state 73
+
+    MethodDeclaration  go to state 74
+
+
+state 48
+
+    9 TempType: TempType Type . IDENTIFIER ';'
+   24 Type: Type . '[' ']'
+
+    IDENTIFIER  shift, and go to state 75
+    '['         shift, and go to state 76
+
+
+state 49
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' . STRING '[' ']' IDENTIFIER ')' Statement '}'
+
+    STRING  shift, and go to state 77
+
+
+state 50
+
+   27 Statement: IDENTIFIER . '=' Expression ';'
+   28          | IDENTIFIER . '[' Expression ']' '=' Expression ';'
+   32          | IDENTIFIER . '(' ExpressionParam ')' ';'
+
+    '('  shift, and go to state 78
+    '['  shift, and go to state 79
+    '='  shift, and go to state 80
+
+
+state 51
+
+   29 Statement: IF . '(' Expression ')' Statement
+   30          | IF . '(' Expression ')' Statement ELSE Statement
+
+    '('  shift, and go to state 81
+
+
+state 52
+
+   31 Statement: WHILE . '(' Expression ')' Statement
+
+    '('  shift, and go to state 82
+
+
+state 53
+
+   26 Statement: PRINTSTMT . '(' Expression ')' ';'
+
+    '('  shift, and go to state 83
+
+
+state 54
+
+   25 Statement: '{' . StatementTemp '}'
+
+    $default  reduce using rule 20 (StatementTemp)
+
+    StatementTemp  go to state 84
+
+
+state 55
+
+   60 MacroDefStatement: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '{' StatementTemp '}' .
+
+    $default  reduce using rule 60 (MacroDefStatement)
+
+
+state 56
+
+   19 StatementTemp: StatementTemp Statement .
+
+    $default  reduce using rule 19 (StatementTemp)
+
+
+state 57
+
+   45 Expression: IDENTIFIER '(' . ExpressionParam ')'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    $default  reduce using rule 50 (ExpressionParam)
+
+    Expression         go to state 85
+    ExpressionParam    go to state 86
+    PrimaryExpression  go to state 42
+
+
+state 58
+
+   23 Type: IDENTIFIER .
+   56 PrimaryExpression: NEW IDENTIFIER . '(' ')'
+
+    '('  shift, and go to state 87
+
+    $default  reduce using rule 23 (Type)
+
+
+state 59
+
+   24 Type: Type . '[' ']'
+   55 PrimaryExpression: NEW Type . '[' Expression ']'
+
+    '['  shift, and go to state 88
+
+
+state 60
+
+   57 PrimaryExpression: '(' Expression . ')'
+
+    ')'  shift, and go to state 89
+
+
+state 61
+
+   36 Expression: '!' Expression . '&' '!' Expression
+   37           | '!' Expression . '&' PrimaryExpression
+   47           | '!' Expression .
+
+    '&'  shift, and go to state 90
+
+    '&'       [reduce using rule 47 (Expression)]
+    $default  reduce using rule 47 (Expression)
+
+
+state 62
+
+   61 MacroDefExpression: DEFINE IDENTIFIER '(' IDENTIFIERParam ')' '(' Expression ')' .
+
+    $default  reduce using rule 61 (MacroDefExpression)
+
+
+state 63
+
+   42 Expression: PrimaryExpression '[' . PrimaryExpression ']'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 92
+
+
+state 64
+
+   33 Expression: PrimaryExpression '<' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 93
+
+
+state 65
+
+   34 Expression: PrimaryExpression '&' . PrimaryExpression
+   35           | PrimaryExpression '&' . '!' Expression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 94
+
+    PrimaryExpression  go to state 95
+
+
+state 66
+
+   38 Expression: PrimaryExpression '+' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 96
+
+
+state 67
+
+   39 Expression: PrimaryExpression '-' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 97
+
+
+state 68
+
+   40 Expression: PrimaryExpression '*' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 98
+
+
+state 69
+
+   41 Expression: PrimaryExpression '/' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+
+    PrimaryExpression  go to state 99
+
+
+state 70
+
+   43 Expression: PrimaryExpression '.' . LENGTH
+   44           | PrimaryExpression '.' . IDENTIFIER '(' ExpressionParam ')'
+
+    IDENTIFIER  shift, and go to state 100
+    LENGTH      shift, and go to state 101
+
+
+state 71
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS IDENTIFIER '{' TempType . MethodDeclarationTemp '}'
+    9 TempType: TempType . Type IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    $default  reduce using rule 12 (MethodDeclarationTemp)
+
+    MethodDeclarationTemp  go to state 102
+    Type                   go to state 48
+
+
+state 72
+
+   13 MethodDeclaration: PUBLIC . Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    Type  go to state 103
+
+
+state 73
+
+    7 TypeDeclaration: CLASS IDENTIFIER '{' TempType MethodDeclarationTemp '}' .
+
+    $default  reduce using rule 7 (TypeDeclaration)
+
+
+state 74
+
+   11 MethodDeclarationTemp: MethodDeclarationTemp MethodDeclaration .
+
+    $default  reduce using rule 11 (MethodDeclarationTemp)
+
+
+state 75
+
+    9 TempType: TempType Type IDENTIFIER . ';'
+
+    ';'  shift, and go to state 104
+
+
+state 76
+
+   24 Type: Type '[' . ']'
+
+    ']'  shift, and go to state 105
+
+
+state 77
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING . '[' ']' IDENTIFIER ')' Statement '}'
+
+    '['  shift, and go to state 106
+
+
+state 78
+
+   32 Statement: IDENTIFIER '(' . ExpressionParam ')' ';'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    $default  reduce using rule 50 (ExpressionParam)
+
+    Expression         go to state 85
+    ExpressionParam    go to state 107
+    PrimaryExpression  go to state 42
+
+
+state 79
+
+   28 Statement: IDENTIFIER '[' . Expression ']' '=' Expression ';'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 108
+    PrimaryExpression  go to state 42
+
+
+state 80
+
+   27 Statement: IDENTIFIER '=' . Expression ';'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 109
+    PrimaryExpression  go to state 42
+
+
+state 81
+
+   29 Statement: IF '(' . Expression ')' Statement
+   30          | IF '(' . Expression ')' Statement ELSE Statement
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 110
+    PrimaryExpression  go to state 42
+
+
+state 82
+
+   31 Statement: WHILE '(' . Expression ')' Statement
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 111
+    PrimaryExpression  go to state 42
+
+
+state 83
+
+   26 Statement: PRINTSTMT '(' . Expression ')' ';'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 112
+    PrimaryExpression  go to state 42
+
+
+state 84
+
+   19 StatementTemp: StatementTemp . Statement
+   25 Statement: '{' StatementTemp . '}'
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+    '}'         shift, and go to state 113
+
+    Statement  go to state 56
+
+
+state 85
+
+   49 ExpressionParam: Expression .
+
+    $default  reduce using rule 49 (ExpressionParam)
+
+
+state 86
+
+   45 Expression: IDENTIFIER '(' ExpressionParam . ')'
+   48 ExpressionParam: ExpressionParam . ',' Expression
+
+    ')'  shift, and go to state 114
+    ','  shift, and go to state 115
+
+
+state 87
+
+   56 PrimaryExpression: NEW IDENTIFIER '(' . ')'
+
+    ')'  shift, and go to state 116
+
+
+state 88
+
+   24 Type: Type '[' . ']'
+   55 PrimaryExpression: NEW Type '[' . Expression ']'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    ']'         shift, and go to state 105
+    '!'         shift, and go to state 40
+
+    Expression         go to state 117
+    PrimaryExpression  go to state 42
+
+
+state 89
+
+   57 PrimaryExpression: '(' Expression ')' .
+
+    $default  reduce using rule 57 (PrimaryExpression)
+
+
+state 90
+
+   36 Expression: '!' Expression '&' . '!' Expression
+   37           | '!' Expression '&' . PrimaryExpression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 91
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 118
+
+    PrimaryExpression  go to state 119
+
+
+state 91
+
+   53 PrimaryExpression: IDENTIFIER .
+
+    $default  reduce using rule 53 (PrimaryExpression)
+
+
+state 92
+
+   42 Expression: PrimaryExpression '[' PrimaryExpression . ']'
+
+    ']'  shift, and go to state 120
+
+
+state 93
+
+   33 Expression: PrimaryExpression '<' PrimaryExpression .
+
+    $default  reduce using rule 33 (Expression)
+
+
+state 94
+
+   35 Expression: PrimaryExpression '&' '!' . Expression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 121
+    PrimaryExpression  go to state 42
+
+
+state 95
+
+   34 Expression: PrimaryExpression '&' PrimaryExpression .
+
+    $default  reduce using rule 34 (Expression)
+
+
+state 96
+
+   38 Expression: PrimaryExpression '+' PrimaryExpression .
+
+    $default  reduce using rule 38 (Expression)
+
+
+state 97
+
+   39 Expression: PrimaryExpression '-' PrimaryExpression .
+
+    $default  reduce using rule 39 (Expression)
+
+
+state 98
+
+   40 Expression: PrimaryExpression '*' PrimaryExpression .
+
+    $default  reduce using rule 40 (Expression)
+
+
+state 99
+
+   41 Expression: PrimaryExpression '/' PrimaryExpression .
+
+    $default  reduce using rule 41 (Expression)
+
+
+state 100
+
+   44 Expression: PrimaryExpression '.' IDENTIFIER . '(' ExpressionParam ')'
+
+    '('  shift, and go to state 122
+
+
+state 101
+
+   43 Expression: PrimaryExpression '.' LENGTH .
+
+    $default  reduce using rule 43 (Expression)
+
+
+state 102
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS IDENTIFIER '{' TempType MethodDeclarationTemp . '}'
+   11 MethodDeclarationTemp: MethodDeclarationTemp . MethodDeclaration
+
+    PUBLIC  shift, and go to state 72
+    '}'     shift, and go to state 123
+
+    MethodDeclaration  go to state 74
+
+
+state 103
+
+   13 MethodDeclaration: PUBLIC Type . IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+   24 Type: Type . '[' ']'
+
+    IDENTIFIER  shift, and go to state 124
+    '['         shift, and go to state 76
+
+
+state 104
+
+    9 TempType: TempType Type IDENTIFIER ';' .
+
+    $default  reduce using rule 9 (TempType)
+
+
+state 105
+
+   24 Type: Type '[' ']' .
+
+    $default  reduce using rule 24 (Type)
+
+
+state 106
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' . ']' IDENTIFIER ')' Statement '}'
+
+    ']'  shift, and go to state 125
+
+
+state 107
+
+   32 Statement: IDENTIFIER '(' ExpressionParam . ')' ';'
+   48 ExpressionParam: ExpressionParam . ',' Expression
+
+    ')'  shift, and go to state 126
+    ','  shift, and go to state 115
+
+
+state 108
+
+   28 Statement: IDENTIFIER '[' Expression . ']' '=' Expression ';'
+
+    ']'  shift, and go to state 127
+
+
+state 109
+
+   27 Statement: IDENTIFIER '=' Expression . ';'
+
+    ';'  shift, and go to state 128
+
+
+state 110
+
+   29 Statement: IF '(' Expression . ')' Statement
+   30          | IF '(' Expression . ')' Statement ELSE Statement
+
+    ')'  shift, and go to state 129
+
+
+state 111
+
+   31 Statement: WHILE '(' Expression . ')' Statement
+
+    ')'  shift, and go to state 130
+
+
+state 112
+
+   26 Statement: PRINTSTMT '(' Expression . ')' ';'
+
+    ')'  shift, and go to state 131
+
+
+state 113
+
+   25 Statement: '{' StatementTemp '}' .
+
+    $default  reduce using rule 25 (Statement)
+
+
+state 114
+
+   45 Expression: IDENTIFIER '(' ExpressionParam ')' .
+
+    $default  reduce using rule 45 (Expression)
+
+
+state 115
+
+   48 ExpressionParam: ExpressionParam ',' . Expression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 132
+    PrimaryExpression  go to state 42
+
+
+state 116
+
+   56 PrimaryExpression: NEW IDENTIFIER '(' ')' .
+
+    $default  reduce using rule 56 (PrimaryExpression)
+
+
+state 117
+
+   55 PrimaryExpression: NEW Type '[' Expression . ']'
+
+    ']'  shift, and go to state 133
+
+
+state 118
+
+   36 Expression: '!' Expression '&' '!' . Expression
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 134
+    PrimaryExpression  go to state 42
+
+
+state 119
+
+   37 Expression: '!' Expression '&' PrimaryExpression .
+
+    $default  reduce using rule 37 (Expression)
+
+
+state 120
+
+   42 Expression: PrimaryExpression '[' PrimaryExpression ']' .
+
+    $default  reduce using rule 42 (Expression)
+
+
+state 121
+
+   35 Expression: PrimaryExpression '&' '!' Expression .
+
+    $default  reduce using rule 35 (Expression)
+
+
+state 122
+
+   44 Expression: PrimaryExpression '.' IDENTIFIER '(' . ExpressionParam ')'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    $default  reduce using rule 50 (ExpressionParam)
+
+    Expression         go to state 85
+    ExpressionParam    go to state 135
+    PrimaryExpression  go to state 42
+
+
+state 123
+
+    8 TypeDeclaration: CLASS IDENTIFIER EXTENDS IDENTIFIER '{' TempType MethodDeclarationTemp '}' .
+
+    $default  reduce using rule 8 (TypeDeclaration)
+
+
+state 124
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER . '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+    '('  shift, and go to state 136
+
+
+state 125
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' . IDENTIFIER ')' Statement '}'
+
+    IDENTIFIER  shift, and go to state 137
+
+
+state 126
+
+   32 Statement: IDENTIFIER '(' ExpressionParam ')' . ';'
+
+    ';'  shift, and go to state 138
+
+
+state 127
+
+   28 Statement: IDENTIFIER '[' Expression ']' . '=' Expression ';'
+
+    '='  shift, and go to state 139
+
+
+state 128
+
+   27 Statement: IDENTIFIER '=' Expression ';' .
+
+    $default  reduce using rule 27 (Statement)
+
+
+state 129
+
+   29 Statement: IF '(' Expression ')' . Statement
+   30          | IF '(' Expression ')' . Statement ELSE Statement
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+
+    Statement  go to state 140
+
+
+state 130
+
+   31 Statement: WHILE '(' Expression ')' . Statement
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+
+    Statement  go to state 141
+
+
+state 131
+
+   26 Statement: PRINTSTMT '(' Expression ')' . ';'
+
+    ';'  shift, and go to state 142
+
+
+state 132
+
+   48 ExpressionParam: ExpressionParam ',' Expression .
+
+    $default  reduce using rule 48 (ExpressionParam)
+
+
+state 133
+
+   55 PrimaryExpression: NEW Type '[' Expression ']' .
+
+    $default  reduce using rule 55 (PrimaryExpression)
+
+
+state 134
+
+   36 Expression: '!' Expression '&' '!' Expression .
+
+    $default  reduce using rule 36 (Expression)
+
+
+state 135
+
+   44 Expression: PrimaryExpression '.' IDENTIFIER '(' ExpressionParam . ')'
+   48 ExpressionParam: ExpressionParam . ',' Expression
+
+    ')'  shift, and go to state 143
+    ','  shift, and go to state 115
+
+
+state 136
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' . Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    $default  reduce using rule 16 (Argument)
+
+    Argument  go to state 144
+    Type      go to state 145
+
+
+state 137
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER . ')' Statement '}'
+
+    ')'  shift, and go to state 146
+
+
+state 138
+
+   32 Statement: IDENTIFIER '(' ExpressionParam ')' ';' .
+
+    $default  reduce using rule 32 (Statement)
+
+
+state 139
+
+   28 Statement: IDENTIFIER '[' Expression ']' '=' . Expression ';'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 147
+    PrimaryExpression  go to state 42
+
+
+state 140
+
+   29 Statement: IF '(' Expression ')' Statement .
+   30          | IF '(' Expression ')' Statement . ELSE Statement
+
+    ELSE  shift, and go to state 148
+
+    ELSE      [reduce using rule 29 (Statement)]
+    $default  reduce using rule 29 (Statement)
+
+
+state 141
+
+   31 Statement: WHILE '(' Expression ')' Statement .
+
+    $default  reduce using rule 31 (Statement)
+
+
+state 142
+
+   26 Statement: PRINTSTMT '(' Expression ')' ';' .
+
+    $default  reduce using rule 26 (Statement)
+
+
+state 143
+
+   44 Expression: PrimaryExpression '.' IDENTIFIER '(' ExpressionParam ')' .
+
+    $default  reduce using rule 44 (Expression)
+
+
+state 144
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument . ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+   14 Argument: Argument . ',' Type IDENTIFIER
+
+    ')'  shift, and go to state 149
+    ','  shift, and go to state 150
+
+
+state 145
+
+   15 Argument: Type . IDENTIFIER
+   24 Type: Type . '[' ']'
+
+    IDENTIFIER  shift, and go to state 151
+    '['         shift, and go to state 76
+
+
+state 146
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' . Statement '}'
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+
+    Statement  go to state 152
+
+
+state 147
+
+   28 Statement: IDENTIFIER '[' Expression ']' '=' Expression . ';'
+
+    ';'  shift, and go to state 153
+
+
+state 148
+
+   30 Statement: IF '(' Expression ')' Statement ELSE . Statement
+
+    IDENTIFIER  shift, and go to state 50
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+
+    Statement  go to state 154
+
+
+state 149
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' . '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+    '{'  shift, and go to state 155
+
+
+state 150
+
+   14 Argument: Argument ',' . Type IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    Type  go to state 156
+
+
+state 151
+
+   15 Argument: Type IDENTIFIER .
+
+    $default  reduce using rule 15 (Argument)
+
+
+state 152
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement . '}'
+
+    '}'  shift, and go to state 157
+
+
+state 153
+
+   28 Statement: IDENTIFIER '[' Expression ']' '=' Expression ';' .
+
+    $default  reduce using rule 28 (Statement)
+
+
+state 154
+
+   30 Statement: IF '(' Expression ')' Statement ELSE Statement .
+
+    $default  reduce using rule 30 (Statement)
+
+
+state 155
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' . ArugmentSecondTemp StatementTemp RETURN Expression ';' '}'
+
+    $default  reduce using rule 18 (ArugmentSecondTemp)
+
+    ArugmentSecondTemp  go to state 158
+
+
+state 156
+
+   14 Argument: Argument ',' Type . IDENTIFIER
+   24 Type: Type . '[' ']'
+
+    IDENTIFIER  shift, and go to state 159
+    '['         shift, and go to state 76
+
+
+state 157
+
+    6 MainClass: CLASS IDENTIFIER '{' PUBLIC STATIC VOID MAIN '(' STRING '[' ']' IDENTIFIER ')' Statement '}' .
+
+    $default  reduce using rule 6 (MainClass)
+
+
+state 158
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp . StatementTemp RETURN Expression ';' '}'
+   17 ArugmentSecondTemp: ArugmentSecondTemp . Type IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 44
+    INT         shift, and go to state 45
+    BOOLEAN     shift, and go to state 46
+
+    IDENTIFIER  [reduce using rule 20 (StatementTemp)]
+    $default    reduce using rule 20 (StatementTemp)
+
+    StatementTemp  go to state 160
+    Type           go to state 161
+
+
+state 159
+
+   14 Argument: Argument ',' Type IDENTIFIER .
+
+    $default  reduce using rule 14 (Argument)
+
+
+state 160
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp . RETURN Expression ';' '}'
+   19 StatementTemp: StatementTemp . Statement
+
+    IDENTIFIER  shift, and go to state 50
+    RETURN      shift, and go to state 162
+    IF          shift, and go to state 51
+    WHILE       shift, and go to state 52
+    PRINTSTMT   shift, and go to state 53
+    '{'         shift, and go to state 54
+
+    Statement  go to state 56
+
+
+state 161
+
+   17 ArugmentSecondTemp: ArugmentSecondTemp Type . IDENTIFIER ';'
+   24 Type: Type . '[' ']'
+
+    IDENTIFIER  shift, and go to state 163
+    '['         shift, and go to state 76
+
+
+state 162
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN . Expression ';' '}'
+
+    INTVAL      shift, and go to state 34
+    BOOLVAL     shift, and go to state 35
+    IDENTIFIER  shift, and go to state 36
+    THIS        shift, and go to state 37
+    NEW         shift, and go to state 38
+    '('         shift, and go to state 39
+    '!'         shift, and go to state 40
+
+    Expression         go to state 164
+    PrimaryExpression  go to state 42
+
+
+state 163
+
+   17 ArugmentSecondTemp: ArugmentSecondTemp Type IDENTIFIER . ';'
+
+    ';'  shift, and go to state 165
+
+
+state 164
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression . ';' '}'
+
+    ';'  shift, and go to state 166
+
+
+state 165
+
+   17 ArugmentSecondTemp: ArugmentSecondTemp Type IDENTIFIER ';' .
+
+    $default  reduce using rule 17 (ArugmentSecondTemp)
+
+
+state 166
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' . '}'
+
+    '}'  shift, and go to state 167
+
+
+state 167
+
+   13 MethodDeclaration: PUBLIC Type IDENTIFIER '(' Argument ')' '{' ArugmentSecondTemp StatementTemp RETURN Expression ';' '}' .
+
+    $default  reduce using rule 13 (MethodDeclaration)

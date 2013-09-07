@@ -1,0 +1,4 @@
+bison -d macrojava.y
+flex macrojava.l
+gcc macrojava.tab.c lex.yy.c -lfl -o macrojava
+./macrojava < X.java > Y.java
